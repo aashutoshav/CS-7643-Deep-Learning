@@ -1,0 +1,18 @@
+Train:
+  batch_size: 128
+  learning_rate: 0.05
+  reg: 0.0005
+  epochs: 15
+  steps: [8, 12]
+  warmup: 0
+  momentum: 0.9
+
+network:
+  model: MyModel
+
+data:
+  imbalance: regular
+  save_best: True
+
+loss:
+  loss_type: CE

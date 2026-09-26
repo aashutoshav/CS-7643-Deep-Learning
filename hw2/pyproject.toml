@@ -1,0 +1,19 @@
+[project]
+name = "HW2"
+version = "0.1.0"
+description = "CS4644/7643 HW2 Part 1"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "argparse>=1.4.0",
+    "matplotlib>=3.10.3",
+    "numpy>=2.2.6",
+    "pytest>=8.4.1",
+    "pyyaml>=6.0.2",
+    "subprocess32>=3.5.4",
+    "nbconvert[webpdf]>=7.16.4",
+    "gdown>=4.7.3",
+    "torch>=2.7.1",
+    "torchvision>=0.22.1",
+    "ipykernel>=6.30.1",
+]
