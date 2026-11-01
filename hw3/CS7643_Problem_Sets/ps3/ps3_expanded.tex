@@ -1,0 +1,644 @@
+\DocumentMetadata{
+    tagging=on,
+    tagging-setup={math/setup=mathml-SE},
+    pdfstandard=ua-2,
+    lang=en-US,
+}
+\documentclass[11pt,english]{article}
+
+
+
+\listfiles
+\usepackage{fullpage}
+\usepackage[showframe=false,margin=1in]{geometry}
+\parindent=0pt
+
+\usepackage{relsize}
+\usepackage[T1]{fontenc} % for properly hyphenating words with accented chars
+\usepackage{babel}
+
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage[belowskip=0pt,aboveskip=0pt,font=small]{caption}
+\usepackage{subcaption}
+\setlength{\intextsep}{7pt plus 0pt minus 0pt}
+
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{textcomp}
+\usepackage{stmaryrd}
+\usepackage{upgreek}
+\usepackage{bm}
+\usepackage{cases}
+\usepackage{mathtools}
+
+\usepackage{url}
+\usepackage{breakurl}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{xspace}
+\usepackage{comment}
+\usepackage{color}
+\usepackage{afterpage}
+\usepackage[normalem]{ulem}
+\usepackage{enumitem}
+\usepackage{amsmath}
+
+
+\usepackage{../assets/mysymbols}
+\usepackage{amsmath,amsfonts}
+\usepackage{amsthm,amssymb,amsopn}
+\usepackage{bm} % bold symbol
+\usepackage{bbm}
+
+\newcommand{\vct}[1]{\boldsymbol{#1}} % vector
+\newcommand{\mat}[1]{\boldsymbol{#1}} % matrix
+
+\newcommand{\field}[1]{\mathbb{#1}}
+\newcommand{\R}{\field{R}} % real domain
+\newcommand{\C}{\field{C}} % complex domain
+\newcommand{\F}{\field{F}} % functional domain
+\newcommand{\T}{^{\textrm T}} % transpose
+\newcommand{\TN}{^{-\textrm T}} % transpose
+\newcommand{\Lagr}{\mathcal{L}}
+
+
+\newcommand{\cst}[1]{\mathsf{#1}}
+
+\newcommand{\inner}[2]{#1\cdot #2}
+\newcommand{\twonorm}[1]{\|#1\|_2^2}
+\newcommand{\Map}[1]{\mathcal{#1}}
+
+\newcommand{\ProbOpr}[1]{\mathbb{#1}}
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+\newcommand{\cind}[3]{{#1} \independent{#2}\,|\,#3}
+\newcommand{\cndexp}[2]{\ProbOpr{E}\,[ #1\,|\,#2\,]}
+
+
+
+\newtheorem{thm}{Theorem}
+
+\newcommand{\eat}[1]{}
+
+\newcommand{\hide}[1]{}
+
+\newcommand{\diff}{\mathop{}\!\mathrm{d}}
+\newcommand{\Vop}{\textrm{T}}
+\newcommand{\norminf}[1]{\norm{#1}_\infty}
+
+\newcommand{\vecy}{\ensuremath{\mathbf{y}}\xspace}
+\newcommand{\vecx}{\ensuremath{\mathbf{x}}\xspace}
+\renewcommand{\argmax}{\operatornamewithlimits{argmax}}
+\newcommand{\startsym}{\mbox{\scriptsize \texttt{<s>}}\xspace}
+\newcommand{\stopsym}{\mbox{\scriptsize \texttt{</s>}}\xspace}
+\newcommand{\best}{\ensuremath{\mathit{best}}\xspace}
+\newcommand{\bestuptoi}{\ensuremath{\texttt{best}_{\leq i}}\xspace}
+\newcommand{\bestuptot}{\ensuremath{\texttt{best}_{\leq t}}\xspace}
+\newcommand{\completed}{\ensuremath{\texttt{comp}}\xspace}
+\newcommand{\toptop}{\operatornamewithlimits{\mathbf{top}}}
+\newcommand{\tuple}[1]{\ensuremath{\langle {#1} \rangle}}
+\newcommand{\xuptot}{\ensuremath{\mathit{x}_{\leq t}}\xspace}
+
+
+\renewcommand{\hide}[1]{}
+\begin{document}
+\title{CS 7643: Deep Learning Solutions\\
+Fall 2026 \\
+Problem Set 3}
+
+\author{Author: Venkata Aashutosh Aripirala \\
+GTID: 904173725}
+% \date{Due: October 28, 2026, 11:59pm}
+\maketitle
+
+
+\paragraph*{Instructions}
+\begin{enumerate}
+\item We will be using Gradescope to collect your assignments.  Please read the following instructions for submitting to Gradescope carefully!
+     \begin{itemize}
+         \item
+               For the \textbf{HW3 Theory} component on Gradescope, upload one single PDF containing the answers to all the theory questions. \textbf{However, the solution to each problem/subproblem must be on a separate page. When submitting to Gradescope, please make sure to mark the page(s) corresponding to each problem/sub-problem.} Questions with misassigned pages will be penalized by up to 1 point.
+          \item
+               For the \textbf{HW3 Code} on Gradescope, please use the \texttt{collect\_submission.py} script provided and upload \textbf{hw3\_code\_submission.zip}
+          \item
+               For the \textbf{HW3 Notebook} component on Gradescope, please use the \texttt{collect\_submission.py} script provided and upload the resulting \textbf{hw3\_notebook\_submission.pdf} on Gradescope.
+          \item
+               Note: This is a large class and Gradescope's assignment segmentation features are essential.
+               Failure to follow these instructions may result in parts of your assignment being penalized.
+               We will not entertain regrading requests for failure to follow instructions.
+     \end{itemize}
+
+\item
+    \LaTeX'd  solutions are strongly encouraged (solution template
+     available on Canvas---HW3 Theory),
+     but scanned handwritten copies are acceptable.
+     Hard copies are \textbf{not} accepted.
+
+
+\item We generally encourage you to collaborate with other students.
+
+You may talk to a friend,
+discuss the questions and potential directions for solving them. However, you need to write
+your own solutions and code separately, and \emph{not} as a group activity.
+Please list the students you collaborated with. \\ \\
+
+\end{enumerate}
+
+
+
+\newpage
+\section{Collaborators [0.5 points]}
+Please list your collaborators and assign this list to the corresponding section of the outline on Gradescope. If you don't have any collaborators, please write 'None' and assign it to the corresponding section of the Gradescope submission regardless. Not assigning this question on Gradescope or leaving it blank will be marked as zero.
+
+\subsection*{Solution}
+
+None
+
+\newpage
+
+
+\section{Logic and XOR}
+\begin{enumerate}
+
+\item
+\textbf{[1 point]}
+Implement AND and OR for pairs of binary inputs using a single linear threshold neuron
+with weights $\vec{w} \in \mathbb{R}^2$, bias $b \in \mathbb{R}$, and $\vec{x} \in \{0, 1\}^2$:
+\begin{equation}
+    f(\vec{x}) = 
+    \begin{cases}
+        1 & \text{if } \vec{w}^T \vec{x} + b \ge 0 \\
+        0 & \text{if } \vec{w}^T \vec{x} + b < 0 \\
+    \end{cases}
+    \label{eq:linear_threshold}
+\end{equation}
+
+That is, find $\vec{w}_{\texttt{AND}}$ and $b_{\texttt{AND}}$ such that
+\begin{center}
+\begin{tabular}{|c|c|c|} 
+\hline
+$x_1$ & $x_2$ & $f_{\texttt{AND}}(\vec{x})$ \\ 
+\hline
+0 & 0 & 0 \\
+0 & 1 & 0 \\
+1 & 0 & 0 \\
+1 & 1 & 1 \\
+\hline
+\end{tabular}
+\end{center}
+
+Also find $\vec{w}_{\texttt{OR}}$ and $b_{\texttt{OR}}$ such that
+\begin{center}
+\begin{tabular}{|c|c|c|} 
+\hline
+$x_1$ & $x_2$ & $f_{\texttt{OR}}(\vec{x})$ \\ 
+\hline
+0 & 0 & 0 \\
+0 & 1 & 1 \\
+1 & 0 & 1 \\
+1 & 1 & 1 \\
+\hline
+\end{tabular}
+\end{center}
+
+You do not need to show your work for this question. You can just provide the specific values for $\vec{w}$ and $b$.
+
+\subsection*{Solution}
+
+For the \textbf{AND} gate:
+\[
+\vec{w}_{\texttt{AND}} = \begin{bmatrix} 1 \\ 1 \end{bmatrix}, \quad b_{\texttt{AND}} = -1.5
+\]
+
+\vspace{0.5em}
+For the \textbf{OR} gate:
+\[
+\vec{w}_{\texttt{OR}} = \begin{bmatrix} 1 \\ 1 \end{bmatrix}, \quad b_{\texttt{OR}} = -0.5
+\]
+
+\newpage
+
+\item
+\textbf{[1 point]}
+Consider the XOR function
+\begin{center}
+\begin{tabular}{|c|c|c|} 
+\hline
+$x_1$ & $x_2$ & $f_{\texttt{XOR}}(x)$ \\ 
+\hline
+0 & 0 & 0 \\
+0 & 1 & 1 \\
+1 & 0 & 1 \\
+1 & 1 & 0 \\
+\hline
+\end{tabular}
+\end{center}
+
+Prove that XOR can NOT be represented using a linear model with the same form as \eqref{eq:linear_threshold}. Graphical/visual proofs will not receive full credit. 
+
+[\textit{Hint:} To see why, plot the examples from above in a plane and think about drawing a linear boundary that separates them.]
+
+\subsection*{Solution}
+
+We prove this by contradiction. 
+
+Assume that there exists a weight vector $\vec{w} = \begin{bmatrix} w_1 \\ w_2 \end{bmatrix} \in \mathbb{R}^2$ and a bias $b \in \mathbb{R}$ such that the model
+\[
+f(\vec{x}) = 
+\begin{cases}
+    1 & \text{if } w_1 x_1 + w_2 x_2 + b \ge 0 \\
+    0 & \text{if } w_1 x_1 + w_2 x_2 + b < 0
+\end{cases}
+\]
+correctly represents $f_{\texttt{XOR}}(\vec{x})$ for all inputs $\vec{x} \in \{0, 1\}^2$.
+
+Based on the XOR truth table, the following four conditions must hold simultaneously:
+\begin{align}
+    \vec{x} = (0, 0) \implies f(\vec{x}) = 0 &\implies w_1(0) + w_2(0) + b < 0 \implies b < 0 \label{eq:xor1} \\
+    \vec{x} = (0, 1) \implies f(\vec{x}) = 1 &\implies w_1(0) + w_2(1) + b \ge 0 \implies w_2 + b \ge 0 \label{eq:xor2} \\
+    \vec{x} = (1, 0) \implies f(\vec{x}) = 1 &\implies w_1(1) + w_2(0) + b \ge 0 \implies w_1 + b \ge 0 \label{eq:xor3} \\
+    \vec{x} = (1, 1) \implies f(\vec{x}) = 0 &\implies w_1(1) + w_2(1) + b < 0 \implies w_1 + w_2 + b < 0 \label{eq:xor4}
+\end{align}
+
+Summing inequalities \eqref{eq:xor2} and \eqref{eq:xor3} gives:
+\begin{equation}
+    (w_2 + b) + (w_1 + b) \ge 0 \implies w_1 + w_2 + 2b \ge 0 \label{eq:sum}
+\end{equation}
+
+Rearranging \eqref{eq:sum}:
+\begin{equation}
+    w_1 + w_2 + b \ge -b \label{eq:rearranged}
+\end{equation}
+
+From inequality \eqref{eq:xor1}, we have $b < 0$, which implies $-b > 0$. Substituting this into \eqref{eq:rearranged}:
+\begin{equation}
+    w_1 + w_2 + b > 0
+\end{equation}
+
+However, this directly contradicts inequality \eqref{eq:xor4}, which requires $w_1 + w_2 + b < 0$. 
+
+Since no such real values $(w_1, w_2, b)$ can satisfy all four constraints simultaneously, the XOR function cannot be represented by a single linear threshold neuron. \qed
+
+\end{enumerate}
+
+
+\newpage
+\section{Recurrent Neural Networks and Transformers}
+\begin{enumerate}[resume]
+
+\item
+\textbf{[LSTM for parity function: 4 points]}
+Let us recall different gates in an LSTM Network. First gate is the "forget gate layer":\\
+\begin{equation}
+    f_t = \sigma (W_f \cdot \begin{bmatrix} h_{t-1} \\ x_t \end{bmatrix} + b_f)
+\end{equation}
+where $f_t$ is the output of forget gate, $W_f$ is the weight matrix, $h_{t-1}$ is the hidden state of step \textit{t-1}, $x_t$ is the current input and $b_f$ is the bias value. \\
+Next we have "input gate layer":\\
+\begin{equation}
+    i_t = \sigma (W_i\cdot \begin{bmatrix} h_{t-1} \\ x_t \end{bmatrix} + b_i) \\
+\end{equation}
+\begin{equation}
+    \Tilde{C_{t}} = \tanh (W_C\cdot \begin{bmatrix} h_{t-1} \\ x_t \end{bmatrix} + b_C) 
+\end{equation} \\
+where $i_t$ decides which values we will update and $\Tilde{C_{t}}$ are the new candidate values that could be added to the cell state. Next we have new cell state candidate values:
+\begin{equation}
+    C_t = C_{t-1} \times f_t + \Tilde{C_{t}} \times i_t 
+    \label{eqn:xor}
+\end{equation}
+Finally, we have the output and hidden state
+\begin{equation}
+   o_t = \sigma (W_o \cdot \begin{bmatrix} h_{t-1} \\ x_t \end{bmatrix} + b_o) \\
+\end{equation}
+\begin{equation}
+    h_t = o_t \times \tanh(C_t)
+\end{equation}
+
+Design an LSTM Network for the bit parity problem, which returns $0$ if there is an even number of $1$s in an input bit string, and $1$ otherwise. 
+Specifically, 
+\begin{enumerate}
+    \item provide values for $W_f$, $b_f$, $W_i$, $b_i$, $W_C$, $b_C$, $W_o$ and $b_o$ such that the cell state $C_t$ stores the parity of an input bit string, assuming $x$, $h$, $f$, $i$, $o$, $b$, and $C$ are all scalars.
+    \item briefly summarize how your LSTM implements the logic to determine bit parity  
+    \item explain how you obtained your values
+\end{enumerate}
+Please mention any assumptions you make. For this problem, you can assume below for Sigmoid and $\tanh$ function: \\
+
+\begin{equation}
+    \sigma(x) = \begin{dcases}
+    1,& \text{if } x > 0\\
+    0,              & \text{otherwise}
+\end{dcases}
+\end{equation}
+\begin{equation}
+    \tanh(x) = \begin{dcases}
+    1,& \text{if } x > 0\\
+    0,              & x = 0\\
+    -1,& \text{if } x < 0
+\end{dcases}
+\end{equation}
+
+
+Hint: Recall that XOR of x and y can be represented as ($x\land \bar{y}$) $\lor$ ($\bar{x} \land y$) which you implemented above. Think about how you can leverage this information for equation \eqref{eqn:xor}.
+
+\subsection*{Solution}
+
+\paragraph*{Assumptions}
+\begin{itemize}
+    \item Initial states: $C_0 = 0$ and $h_0 = 0$. (Even parity corresponds to value $0$, odd parity corresponds to $1$).
+    \item Binary inputs: $x_t \in \{0, 1\}$.
+    \item Weight matrices are row vectors of dimension $1 \times 2$:
+    \[
+    W = \begin{bmatrix} W_{*, h} & W_{*, x} \end{bmatrix} \implies W \begin{bmatrix} h_{t-1} \\ x_t \end{bmatrix} = W_{*, h} h_{t-1} + W_{*, x} x_t
+    \]
+\end{itemize}
+
+\subsubsection*{(a) Parameter Values}
+\begin{itemize}
+    \item \textbf{Forget Gate:}
+    \[
+    W_f = \begin{bmatrix} 0 & -2 \end{bmatrix}, \quad b_f = 1
+    \]
+    \item \textbf{Input Gate:}
+    \[
+    W_i = \begin{bmatrix} -2 & 2 \end{bmatrix}, \quad b_i = -1
+    \]
+    \item \textbf{Candidate Cell State:}
+    \[
+    W_C = \begin{bmatrix} 0 & 0 \end{bmatrix}, \quad b_C = 1
+    \]
+    \item \textbf{Output Gate:}
+    \[
+    W_o = \begin{bmatrix} 0 & 0 \end{bmatrix}, \quad b_o = 1
+    \]
+\end{itemize}
+
+
+\newpage
+\subsubsection*{(b) Logic Summary}
+The parity problem is an incremental XOR operation between the previous parity state $h_{t-1} \in \{0, 1\}$ and the current input bit $x_t \in \{0, 1\}$:
+\[
+C_t = h_{t-1} \oplus x_t = (h_{t-1} \land \bar{x}_t) \lor (\bar{h}_{t-1} \land x_t)
+\]
+In an LSTM, the update equation is:
+\[
+C_t = C_{t-1} \cdot f_t + \tilde{C}_t \cdot i_t
+\]
+Because the output gate always opens ($o_t = 1$), we have $\tanh(C_t) = C_t \implies h_t = C_t \in \{0, 1\}$. Thus, $C_{t-1} = h_{t-1}$. 
+\begin{itemize}
+    \item When $h_{t-1} = 1$: $C_{t-1} \cdot f_t = 1 \cdot f_t = f_t$. To satisfy the XOR logic, $C_t$ must keep the value $1$ if and only if $x_t = 0$. Hence, we choose the forget gate so that \(f_t=1\) when \(x_t=0\) and \(f_t=0\) when \(x_t=1\). Since \(C_{t-1}=h_{t-1}\), the product \(C_{t-1}f_t\) implements the term \((h_{t-1}\land\bar{x}_t)\).
+    \item When $h_{t-1} = 0$: $C_{t-1} \cdot f_t = 0$, so $C_t = \tilde{C}_t \cdot i_t$. Setting $\tilde{C}_t = 1$ and letting $i_t$ act as the term $(\bar{h}_{t-1} \land x_t)$, we have $i_t = 1$ when $(h_{t-1}, x_t) = (0, 1)$, and $0$ otherwise.
+\end{itemize}
+Because the two conditions $(h_{t-1}=1 \land x_t=0)$ and $(h_{t-1}=0 \land x_t=1)$ are mutually exclusive, $C_t = f_t + i_t = h_{t-1} \oplus x_t \in \{0, 1\}$.
+
+\newpage
+\subsubsection*{(c) Derivation of Parameters}
+\begin{enumerate}
+    \item \textbf{Output Gate ($o_t = 1$):} We want $o_t = \sigma(0 \cdot h_{t-1} + 0 \cdot x_t + b_o) = 1$ for all inputs. Using $b_o = 1 > 0$ yields $o_t = 1$. Since $C_t \in \{0, 1\}$, $\tanh(0) = 0$ and $\tanh(1) = 1$, giving $h_t = o_t \tanh(C_t) = C_t$.
+    \item \textbf{Candidate State ($\tilde{C}_t = 1$):} Choosing $W_C = [0, 0]$ and $b_C = 1 > 0$ gives $\tilde{C}_t = \tanh(1) = 1$ at all steps.
+    \item \textbf{Forget Gate:} 
+    Since $C_{t-1} = 0$ zeroes out $C_{t-1} f_t$ automatically, when $h_{t-1} = 1$, we require $f_t = 1$ if $x_t = 0$ and $f_t = 0$ if $x_t = 1$:
+    \[
+    \begin{cases}
+    (h_{t-1}, x_t) = (1, 0) \implies W_{f, h}(1) + W_{f, x}(0) + b_f > 0 \\
+    (h_{t-1}, x_t) = (1, 1) \implies W_{f, h}(1) + W_{f, x}(1) + b_f \le 0
+    \end{cases}
+    \]
+    Setting $W_f = [0, -2]$ and $b_f = 1$:
+    \begin{itemize}
+            \item If $x_t = 0$: $0(h_{t-1}) - 2(0) + 1 = 1 > 0 \implies f_t = 1$.
+            \item If $x_t = 1$: $0(h_{t-1}) - 2(1) + 1 = -1 \le 0 \implies f_t = 0$
+    \end{itemize}s
+    This choice $W_f = \begin{bmatrix} 0 & -2 \end{bmatrix}, b_f = 1$ yields $f_t = 1$ whenever $x_t = 0$, meaning $C_t = C_{t-1} \cdot 1 = C_{t-1}$ when $x_t = 0$.
+    \item \textbf{Input Gate ($i_t = \bar{h}_{t-1} \land x_t$):}
+    We require $i_t = 1$ strictly when $(h_{t-1}, x_t) = (0, 1)$, and $0$ otherwise:
+    \[
+    \begin{cases}
+    (0, 0): b_i \le 0 \\
+    (0, 1): W_{i, x} + b_i > 0 \\
+    (1, 0): W_{i, h} + b_i \le 0 \\
+    (1, 1): W_{i, h} + W_{i, x} + b_i \le 0
+    \end{cases}
+    \]
+    Setting $W_i = \begin{bmatrix} -2 & 2 \end{bmatrix}$ and $b_i = -1$:
+    \begin{itemize}
+        \item $(0, 0): -1 \le 0 \implies i_t = 0$
+        \item $(0, 1): 2(1) - 1 = 1 > 0 \implies i_t = 1$
+        \item $(1, 0): -2(1) - 1 = -3 \le 0 \implies i_t = 0$
+        \item $(1, 1): -2(1) + 2(1) - 1 = -1 \le 0 \implies i_t = 0$
+    \end{itemize}
+\end{enumerate}
+Together with $W_f = \begin{bmatrix} 0 & -2 \end{bmatrix}, b_f = 1$, the transition table verifies as:
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+$h_{t-1}$ & $x_t$ & $f_t$ & $i_t$ & $\tilde{C}_t$ & $C_t = h_{t-1} f_t + \tilde{C}_t i_t$ & $h_t$ \\
+\hline
+0 & 0 & 1 & 0 & 1 & $0(1) + 1(0) = 0$ & 0 \\
+0 & 1 & 0 & 1 & 1 & $0(0) + 1(1) = 1$ & 1 \\
+1 & 0 & 1 & 0 & 1 & $1(1) + 1(0) = 1$ & 1 \\
+1 & 1 & 0 & 0 & 1 & $1(0) + 1(0) = 0$ & 0 \\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+\item
+\textbf{[When to Stop in Beam Search: 2 points]}
+Beam Search is a widely-used technique for decoding the most likely sequence from sequence models. 
+But it is difficult to decide when to stop beam search to obtain optimality because hypotheses can finish in different steps. 
+In this question, we will develop a formal understanding of the stopping criteria in beam search. 
+
+Suppose we are generating a sequence $\vec{y} = (y_1, y_2, \ldots, y_T)$ conditioned on input $\vec{x}$ using beam search with beam size $b$, which is the number of sequences we are exploring in parallel. We will sample next tokens in the sequence using the distribution defined by $p(y_t|\vec{x}, y_{<i})$, which can be thought of as an autoregressive sequence model.
+
+\begin{itemize}
+    \item A sequence $\vec{y}$ is \textbf{complete} if it ends with $\stopsym$: 
+    $$\textsc{completed}(\vec{y}) = \text{true} \iff y_{|\vec{y}|} = \stopsym$$
+    
+    \item The \textbf{score} $s(\vec{y})$ of a sequence $\vec{y}$ is the sum of the token log probabilities:
+    $$s(\vec{y}) = \sum_{i=1}^{|\vec{y}|} \log p(y_i \mid \vec{x}, y_{<i})$$
+    
+    \item Let $B_t$ be the set of the top-$b$ active beams at step $t$, where each element is $\langle \vec{y}, s(\vec{y}) \rangle$.
+    \begin{align*}
+        B_t = \text{top}^b \Big\{ & \langle \vec{y} \circ y_t, \, s(\vec{y}) + \log p(y_t \mid \vec{x}, \vec{y}) \rangle \, :
+        \langle \vec{y}, s(\vec{y}) \rangle \in B_{t-1}, \, y_t \in \mathcal{V} \Big\}
+    \end{align*}
+    where $\mathcal{V}$ is the vocabulary and $\text{top}^b$ selects the $b$ highest-scoring candidates. Assume we start sampling from an empty sequence such that $B_0 = \{\langle \{\}, 0 \rangle\}$.
+    
+    \item $s_{\text{best}}^{(t)}$ = score of the best \emph{completed} sequence found up to step $t$:
+    $$s_{\text{best}}^{(t)} = \max \left\{ s(\vec{y}) \mid \langle \vec{y}, s(\vec{y}) \rangle \in \bigcup_{j \leq t} B_j, \, \textsc{completed}(\vec{y}) = \text{true} \right\}$$
+\end{itemize}
+
+Suppose at step $t$, $s_{\text{best}}^{(t)}$ is defined (at least one complete sequence exists) and that the current highest scoring beam in $B_t$ (\emph{i.e.} $\vec{y}^1$) scores worse than or equal to $s_{\text{best}}^{(t)}$ (\emph{i.e.} $s^1 \leq s_{\text{best}}^{(t)}$).
+\textbf{For this question, explain why no future completed sequence $\vec{y}^*$ (of length $>=t+1$) will have a score greater than $s_{\text{best}}^{(t)}$.} 
+
+
+\subsection*{Solution}
+
+We want to prove why no future completed sequence $\vec{y}^*$ of length $|\vec{y}^*| \ge t+1$ can attain a score strictly greater than $s_{\text{best}}^{(t)}$, given that the highest-scoring candidate in the active beam $B_t$ satisfies:
+\[
+s(\vec{y}^1) \le s_{\text{best}}^{(t)}
+\]
+
+
+By definition, the score of any candidate sequence $\vec{y} = (y_1, y_2, \ldots, y_k)$ is the cumulative sum of log probabilities:
+\[
+s(\vec{y}) = \sum_{i=1}^k \log p(y_i \mid \vec{x}, y_{<i})
+\]
+Since $p(y_i \mid \vec{x}, y_{<i})$ is a valid conditional probability, $0 \le p(y_i \mid \vec{x}, y_{<i}) \le 1$. Consequently, every log probability term is non-positive:
+\[
+\log p(y_i \mid \vec{x}, y_{<i}) \le 0, \quad \forall i
+\]
+For any extended sequence $\vec{y}' = \vec{y} \circ y_{k+1} \circ \cdots \circ y_m$ ($m > k$), its score is:
+\[
+s(\vec{y}') = s(\vec{y}) + \sum_{j=k+1}^m \log p(y_j \mid \vec{x}, y_{<j}) \le s(\vec{y})
+\]
+Thus, extending any sequence can only decrease (or at best preserve) its cumulative log-likelihood score.
+
+Any candidate sequence $\vec{y}^*$ completed at some future step $T \ge t+1$ must originate by extending one of the active beams present in $B_t$:
+\[
+\exists \vec{y} \in B_t \quad \text{such that} \quad \vec{y}^* = \vec{y} \circ y_{t+1} \circ \cdots \circ y_T
+\]
+Applying the monotonic non-increasing property:
+\[
+s(\vec{y}^*) \le s(\vec{y})
+\]
+By definition, $\vec{y}^1$ is the highest-scoring beam in $B_t$, which implies:
+\[
+s(\vec{y}) \le s(\vec{y}^1), \quad \forall \vec{y} \in B_t
+\]
+Combining these inequalities with the given stopping condition $s(\vec{y}^1) \le s_{\text{best}}^{(t)}$:
+\[
+s(\vec{y}^*) \le s(\vec{y}) \le s(\vec{y}^1) \le s_{\text{best}}^{(t)}
+\]
+
+Therefore, \(s(\vec{y}^*)\leq s_{\text{best}}^{(t)}\). No future completed sequence extending a beam in \(B_t\) can achieve a score greater than the best completed sequence already found. Thus, the stated stopping condition is valid for terminating the current beam search.
+
+\newpage
+\item
+\textbf{[Exploding Gradients: 2 points]}
+Learning long-term dependencies in recurrent networks suffers from a particular numerical challenge -- 
+gradients propagated over many time-steps tend to either `vanish' (converge to 0) or `explode' (diverge to infinity). To study this problem in a simple setting, consider the following recurrence relation without any nonlinear activation function or input $x$:
+
+\begin{equation} \label{eq:simple_recurrence}
+h_{t} = W h_{t-1}
+\end{equation}
+
+where $W$ is a weight sharing matrix for recurrent relation at any time $t$. Let $\lambda_1, ..., \lambda_n$ be the $n$ distinct eigenvalues of the weight matrix $W \in \C^{n \times n}$. Its spectral radius $\rho(W)$ is defined as: 
+
+\begin{align}
+\rho(W) = \text{max}\{|\lambda_1|, ... ,|\lambda_n| \}
+\end{align}
+
+Assuming the initial hidden state is $h_0$, write $h_t$ in terms of $h_0$ and $W$ and explain the role of the eigenvalues of $W$ in determining the `vanishing' or `exploding' property as $t\gg0$ (t grows very large).
+
+
+\subsection*{Solution}
+
+Given the linear recurrent relation:
+\[
+h_t = W h_{t-1}
+\]
+We can write this recurrence recursively going from step $t$ down to $0$:
+\begin{align*}
+    h_1 &= W h_0 \\
+    h_2 &= W h_1 = W(W h_0) = W^2 h_0 \\
+    &\;\;\vdots \\
+    h_t &= W^t h_0
+\end{align*}
+
+Assume $W \in \mathbb{C}^{n \times n}$ has $n$ distinct eigenvalues $\lambda_1, \ldots, \lambda_n$ with corresponding linearly independent eigenvectors $\vec{v}_1, \ldots, \vec{v}_n$. Then through eigen-value decomposition, $W$ can be decomposed as:
+\[
+W = V \Lambda V^{-1}
+\]
+where $\Lambda = \operatorname{diag}(\lambda_1, \ldots, \lambda_n)$ and $V = [\vec{v}_1, \ldots, \vec{v}_n]$. Raising $W$ to the $t$-th power yields:
+\[
+W^t = V \Lambda^t V^{-1} = V \begin{bmatrix} \lambda_1^t & & 0 \\ & \ddots & \\ 0 & & \lambda_n^t \end{bmatrix} V^{-1}
+\]
+Since the eigenvectors form a basis of $\mathbb{C}^n$, any initial hidden state $h_0$ can be represented uniquely as a linear combination of eigenvectors:
+\[
+h_0 = \sum_{i=1}^n c_i \vec{v}_i, \quad c_i \in \mathbb{C}
+\]
+Multiplying by $W^t$:
+\[
+h_t = W^t h_0 = \sum_{i=1}^n c_i W^t \vec{v}_i = \sum_{i=1}^n c_i \lambda_i^t \vec{v}_i
+\]
+
+The spectral radius of $W$ is defined as $\rho(W) = \max_{1 \le i \le n} |\lambda_i|$. As $t \gg 0$ ($t \to \infty$), the asymptotic behavior of each term $\lambda_i^t$ depends entirely on the magnitude of the eigenvalues:
+
+\begin{itemize}
+    \item \textbf{Vanishing Gradients / Activations ($\rho(W) < 1$):}
+    If $|\lambda_i| < 1$ for all $i \in \{1, \ldots, n\}$, then for every component:
+    \[
+    \lim_{t \to \infty} |\lambda_i|^t = 0 \implies \lim_{t \to \infty} h_t = \mathbf{0}
+    \]
+    Similarly, when computing backpropagation through time, the gradient of a loss $\mathcal{L}_T$ at time $T$ with respect to state $h_t$ involves the Jacobian product:
+    \[
+    \frac{\partial h_T}{\partial h_t} = W^{T-t}
+    \]
+    When $\rho(W) < 1$, as the temporal gap $(T - t)$ becomes large, $W^{T-t} \to 0$. Gradients decay exponentially to zero, preventing the network from learning long-term temporal dependencies.
+
+    \item \textbf{Exploding Gradients / Activations ($\rho(W) > 1$):}
+    If there exists at least one eigenvalue such that $|\lambda_k| > 1$, then for any initial condition $h_0$ with non-zero projection along $\vec{v}_k$ ($c_k \neq 0$):
+    \[
+    |\lambda_k|^t \to \infty \quad \text{as } t \to \infty \implies \|h_t\| \to \infty
+    \]
+    In BPTT, $\|W^{T-t}\| \ge (\rho(W))^{T-t} \to \infty$, causing the backpropagated gradients to grow exponentially large, resulting in numerical overflow (\texttt{NaN} / \texttt{Inf}) and unstable parameter updates.
+
+    \item \textbf{Stability around ($\rho(W) = 1$):}
+    When \(\rho(W)=1\) and all eigenvalues satisfy \(|\lambda_i|\leq 1\), the powers \(W^t\) remain bounded under the distinct-eigenvalues assumption. Importantly though, boundedness of \(W^t\) of  alone does not guarantee that they are preserved at a constant magnitude or that long-term learning is stable.
+\end{itemize}
+
+\end{enumerate}
+
+\newpage
+\section{Paper Review}
+
+For this homework's paper review section, we will read \textbf{FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness}. The paper can be viewed \href{https://arxiv.org/abs/2205.14135}
+{here}.
+
+The evaluation rubric for this section is as follows:
+\begin{enumerate}[resume]
+\item
+\textbf{[2 points]}
+Briefly summarize the key contributions, strengths and weaknesses of this paper.
+
+\subsection*{Solution}
+
+\textbf{FlashAttention} introduces an IO-aware exact attention algorithm designed to address the memory bandwidth bottleneck in standard Transformer attention. 
+
+\paragraph{Contributions} 
+The authors identify that standard attention incurs substantial data-transfer overhead between slow GPU high-bandwidth memory (HBM) and fast on-chip SRAM. They introduce a tiled attention computation using online softmax, avoiding materialization of the full ($N \times N$) attention matrix in HBM. They also develop an IO-aware backward pass that recomputes intermediate attention quantities rather than storing the entire attention matrix, reducing memory consumption and data transfers.
+
+\paragraph{Strengths}
+\begin{itemize}[noitemsep,topsep=0pt]
+    \item \textbf{Exact \& Memory Efficient:} Unlike approximate methods, FlashAttention computes mathematically exact attention upto floating point rounding differences while reducing HBM accesses from quadratic $O(N^2)$ to sub-quadratic $O(N^2 d^2 / M)$ ``under the paper's assumptions'', while retaining the $O(N^2d)$ arithmetic cost of dense attention, where ($N$) is the sequence length, ($d$) is the head dimension, and ($M$) is the available SRAM capacity. Its memory usage is linear in sequence length for fixed head dimensions, rather than quadratic as in standard attention implementations that materialize the attention matrix.
+    \item \textbf{Downstream Impact:} The paper demonstrates substantial wall-clock speedups on several Transformer workloads, including a ($3\times$) speedup on GPT-2 at sequence length 1K and a ($2.4\times$) speedup on Long Range Arena tasks. FlashAttention also enables experiments with longer contexts, including sequences of 16K and 64K tokens in specific Path-X and Path-256 benchmarks.
+\end{itemize}
+
+\paragraph{Weaknesses}
+\begin{itemize}[noitemsep,topsep=0pt]
+    \item \textbf{Hardware Specificity:} Implementing efficient SRAM tiling requires low-level, hardware-specific kernel optimization (e.g., custom CUDA/Triton kernels), making portability across non-NVIDIA custom accelerators non-trivial.
+    \item \textbf{SRAM Size Dependence:} Performance depends on available on-chip SRAM, memory bandwidth, head dimension, and tile configuration. Consequently, the performance gains vary across hardware platforms and workloads, and the implementation must select suitable tile sizes to use on-chip resources efficiently.
+\end{itemize}
+
+\newpage
+
+\item
+\textbf{[2 points]}
+What is your personal takeaway from this paper? This could be expressed either in terms of relating the approaches adopted in this paper to your traditional understanding of explainability techniques, or potential future directions of research in the area which the authors haven't addressed, or anything else that struck you as being noteworthy. 
+
+\subsection*{Solution}
+
+My key takeaway is that algorithmic design in modern deep learning cannot treat computation in isolation from the hardware memory hierarchy. While algorithmic complexity is often analyzed in terms of FLOPs, FlashAttention demonstrates that execution time can also be dominated by memory IO bottlenecks. By trading additional computation, such as recomputing intermediate attention quantities during the backward pass, for reduced HBM read/write traffic, the authors achieve substantial practical speedups while retaining the mathematical exactness of attention.
+
+Looking forward, this IO-aware paradigm opens several compelling directions:
+\begin{itemize}[noitemsep,topsep=0pt]
+    \item \textbf{Cross-Layer Operator Fusion:} Extending fine-grained memory tiling beyond self-attention into entire Transformer blocks (fusing LayerNorm, projections, MLP layers, and residual connections into unified SRAM tiles) to minimize intermediate DRAM writes.
+    \item \textbf{Hardware-Co-Design for Non-Uniform Memory:} Adapting IO-aware primitives for heterogeneous architectures, distributed multi-node pipeline stages, and decentralized inference where memory latency is distributed across interconnects.
+\end{itemize}
+Overall, the work underscores that bridging system-level architectural realities with core deep learning algorithms often yields more practical breakthroughs than asymptotic algorithmic changes alone.
+
+\end{enumerate}
+
+
+\end{document}
+

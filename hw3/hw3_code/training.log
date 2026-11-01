@@ -1,0 +1,79 @@
+2026-10-18 00:01:37,522 - INFO - Starting transformer training script
+2026-10-18 00:01:37,527 - INFO - Training configuration loaded
+2026-10-18 00:01:37,529 - INFO - Learning rate: 0.0005
+2026-10-18 00:01:37,529 - INFO - Batch size: 16
+2026-10-18 00:01:37,530 - INFO - Max iterations: 10000
+2026-10-18 00:01:37,530 - INFO - Using device: cpu
+2026-10-18 00:01:37,531 - INFO - Loading piglatin dataset split: train...
+2026-10-18 00:01:43,485 - INFO - Loaded 13232 samples from train split
+2026-10-18 00:01:45,167 - INFO - Created Decoder model with 4 layers, 64 embedding dim, 2 heads
+2026-10-18 00:01:45,168 - INFO - Model created with 245,888 parameters
+2026-10-18 00:01:45,169 - INFO - Starting training...
+2026-10-18 00:01:48,475 - INFO - Created training dataset with 13232 samples
+2026-10-18 00:01:52,473 - ERROR - Training failed with error: view size is not compatible with input tensor's size and stride (at least one dimension spans across two contiguous subspaces). Use .reshape(...) instead.
+2026-10-18 00:04:17,918 - INFO - Starting transformer training script
+2026-10-18 00:04:17,921 - INFO - Training configuration loaded
+2026-10-18 00:04:17,921 - INFO - Learning rate: 0.0005
+2026-10-18 00:04:17,921 - INFO - Batch size: 16
+2026-10-18 00:04:17,921 - INFO - Max iterations: 10000
+2026-10-18 00:04:17,922 - INFO - Using device: cpu
+2026-10-18 00:04:17,922 - INFO - Loading piglatin dataset split: train...
+2026-10-18 00:04:19,029 - INFO - Loaded 13232 samples from train split
+2026-10-18 00:04:19,864 - INFO - Created Decoder model with 4 layers, 64 embedding dim, 2 heads
+2026-10-18 00:04:19,865 - INFO - Model created with 245,888 parameters
+2026-10-18 00:04:19,866 - INFO - Starting training...
+2026-10-18 00:04:21,506 - INFO - Created training dataset with 13232 samples
+2026-10-18 00:08:04,873 - INFO - Starting transformer training script
+2026-10-18 00:08:05,059 - INFO - Training configuration loaded
+2026-10-18 00:08:05,059 - INFO - Learning rate: 0.0005
+2026-10-18 00:08:05,059 - INFO - Batch size: 16
+2026-10-18 00:08:05,059 - INFO - Max iterations: 10000
+2026-10-18 00:08:05,059 - INFO - Using device: cuda
+2026-10-18 00:08:05,060 - INFO - Loading piglatin dataset split: train...
+2026-10-18 00:08:07,693 - INFO - Loaded 13232 samples from train split
+2026-10-18 00:08:08,350 - INFO - Created Decoder model with 4 layers, 64 embedding dim, 2 heads
+2026-10-18 00:08:08,350 - INFO - Model created with 245,888 parameters
+2026-10-18 00:08:08,350 - INFO - Starting training...
+2026-10-18 00:08:09,743 - INFO - Created training dataset with 13232 samples
+2026-10-18 00:08:35,477 - INFO - Checkpoint saved to checkpoints/checkpoint_iter_1000.pt
+2026-10-18 00:08:58,690 - INFO - Checkpoint saved to checkpoints/checkpoint_iter_2000.pt
+2026-10-18 00:09:22,236 - INFO - Checkpoint saved to checkpoints/checkpoint_iter_3000.pt
+2026-10-18 00:09:45,397 - INFO - Checkpoint saved to checkpoints/checkpoint_iter_4000.pt
+2026-10-18 00:10:08,783 - INFO - Checkpoint saved to checkpoints/checkpoint_iter_5000.pt
+2026-10-18 00:10:32,591 - INFO - Checkpoint saved to checkpoints/checkpoint_iter_6000.pt
+2026-10-18 00:10:55,737 - INFO - Checkpoint saved to checkpoints/checkpoint_iter_7000.pt
+2026-10-18 00:11:19,316 - INFO - Checkpoint saved to checkpoints/checkpoint_iter_8000.pt
+2026-10-18 00:11:42,524 - INFO - Checkpoint saved to checkpoints/checkpoint_iter_9000.pt
+2026-10-18 00:12:05,987 - INFO - Checkpoint saved to checkpoints/checkpoint_iter_10000.pt
+2026-10-18 00:12:05,988 - INFO - Training completed!
+2026-10-18 00:12:06,007 - INFO - Checkpoint saved to checkpoints/checkpoint_iter_10000.pt
+2026-10-18 00:12:06,008 - INFO - Final checkpoint saved
+2026-10-18 00:12:06,008 - INFO - To evaluate this model, run: python evaluate.py checkpoints/checkpoint_iter_10000.pt
+2026-10-18 00:12:06,008 - INFO - Training script completed successfully!
+2026-10-18 00:12:10,446 - INFO - Starting transformer training script
+2026-10-18 00:12:10,448 - INFO - Training configuration loaded
+2026-10-18 00:12:10,448 - INFO - Learning rate: 0.0003
+2026-10-18 00:12:10,448 - INFO - Batch size: 128
+2026-10-18 00:12:10,448 - INFO - Max iterations: 10000
+2026-10-18 00:12:10,449 - INFO - Using device: cuda
+2026-10-18 00:12:10,449 - INFO - Loading piglatin dataset split: train...
+2026-10-18 00:12:11,502 - INFO - Loaded 13232 samples from train split
+2026-10-18 00:12:12,258 - INFO - Created Decoder model with 6 layers, 256 embedding dim, 8 heads
+2026-10-18 00:12:12,259 - INFO - Model created with 4,922,368 parameters
+2026-10-18 00:12:12,259 - INFO - Starting training...
+2026-10-18 00:12:13,689 - INFO - Created training dataset with 13232 samples
+2026-10-18 00:14:32,100 - INFO - Checkpoint saved to checkpoints_tuned/checkpoint_iter_1000.pt
+2026-10-18 00:16:48,436 - INFO - Checkpoint saved to checkpoints_tuned/checkpoint_iter_2000.pt
+2026-10-18 00:19:04,851 - INFO - Checkpoint saved to checkpoints_tuned/checkpoint_iter_3000.pt
+2026-10-18 00:21:21,175 - INFO - Checkpoint saved to checkpoints_tuned/checkpoint_iter_4000.pt
+2026-10-18 00:23:37,486 - INFO - Checkpoint saved to checkpoints_tuned/checkpoint_iter_5000.pt
+2026-10-18 00:25:53,896 - INFO - Checkpoint saved to checkpoints_tuned/checkpoint_iter_6000.pt
+2026-10-18 00:28:10,318 - INFO - Checkpoint saved to checkpoints_tuned/checkpoint_iter_7000.pt
+2026-10-18 00:30:26,710 - INFO - Checkpoint saved to checkpoints_tuned/checkpoint_iter_8000.pt
+2026-10-18 00:32:43,129 - INFO - Checkpoint saved to checkpoints_tuned/checkpoint_iter_9000.pt
+2026-10-18 00:34:59,479 - INFO - Checkpoint saved to checkpoints_tuned/checkpoint_iter_10000.pt
+2026-10-18 00:34:59,480 - INFO - Training completed!
+2026-10-18 00:34:59,542 - INFO - Checkpoint saved to checkpoints_tuned/checkpoint_iter_10000.pt
+2026-10-18 00:34:59,542 - INFO - Final checkpoint saved
+2026-10-18 00:34:59,542 - INFO - To evaluate this model, run: python evaluate.py checkpoints_tuned/checkpoint_iter_10000.pt
+2026-10-18 00:34:59,542 - INFO - Training script completed successfully!

@@ -1,0 +1,23 @@
+\usepackage{amsmath}
+% from https://gist.github.com/KevinGutowski/98ca9548e1525bb09024c79f5c35a506
+\usepackage{wasysym}
+\usepackage{enumitem}
+\usepackage{accsupp}
+
+% \newcommand{\chooseone}{{\Large$\Circle$\ \ }}
+% \newcommand{\chooseonecorrect}{{\Large$\CIRCLE$\ \ }}
+% \newcommand{\choosemany}{{\Large$\Square$\ \ }}
+% \newcommand{\choosemanycorrect}{{\Large$\blacksquare$\ \ }}
+
+% \newcommand{\chooseone}{\BeginAccSupp{ActualText=empty circle}{\Large$\Circle$\ \ }\EndAccSupp{}}
+% \newcommand{\choosemany}{\BeginAccSupp{ActualText=empty square}{\Large$\Square$\ \ }\EndAccSupp{}}
+% \newcommand{\chooseonecorrect}{\BeginAccSupp{ActualText=correct answer}{\Large$\CIRCLE$\ \ }\EndAccSupp{}}
+% \newcommand{\choosemanycorrect}{\BeginAccSupp{ActualText=correct answer}{\Large$\blacksquare$\ \ }\EndAccSupp{}}
+
+\usepackage{fontspec}
+\newfontfamily{\wasyfont}{DejaVu Sans}
+
+\newcommand{\chooseone}{\BeginAccSupp{ActualText=empty circle}{\Large{\wasyfont ○}\ \ }\EndAccSupp{}}
+\newcommand{\choosemany}{\BeginAccSupp{ActualText=empty square}{\Large{\wasyfont □}\ \ }\EndAccSupp{}}
+\newcommand{\chooseonecorrect}{\BeginAccSupp{ActualText=correct answer}{\Large{\wasyfont ●}\ \ }\EndAccSupp{}}
+\newcommand{\choosemanycorrect}{\BeginAccSupp{ActualText=correct answer}{\Large{\wasyfont ■}\ \ }\EndAccSupp{}}
